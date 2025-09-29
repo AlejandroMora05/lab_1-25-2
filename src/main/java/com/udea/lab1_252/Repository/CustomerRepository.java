@@ -10,5 +10,5 @@ import com.udea.lab1_252.Entity.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long>{
 
-    Optional<Customer> FindByAccountNumber(String AccountNumber);
+    Optional<Customer> findByAccountNumber(String accountNumber);
 } 

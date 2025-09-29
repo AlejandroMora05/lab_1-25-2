@@ -28,9 +28,9 @@ public class TransactionService {
         }
 
         // Buscar los clientes por número de cuenta
-        Customer sender = customerRepository.FindByAccountNumber(transactionDTO.getSenderAccountNumber())
+        Customer sender = customerRepository.findByAccountNumber(transactionDTO.getSenderAccountNumber())
                 .orElseThrow(() -> new IllegalArgumentException("La cuenta del remitente no existe."));
-        Customer receiver = customerRepository.FindByAccountNumber(transactionDTO.getReceiverAccountNumber())
+        Customer receiver = customerRepository.findByAccountNumber(transactionDTO.getReceiverAccountNumber())
                 .orElseThrow(() -> new IllegalArgumentException("La cuenta del receptor no existe."));
                 //    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Sender not found"));
         // Validar que el remitente tenga saldo suficiente
@@ -67,7 +67,7 @@ public class TransactionService {
     }
 
     public List<TransactionDTO> getTransactionsForAccount(String accountNumber) {
-        List<Transaction> transactions = transactionRepository.FindBySenderAccountNumberOrReceiverAccountNumber(accountNumber, accountNumber);
+        List<Transaction> transactions = transactionRepository.findBySenderAccountNumberOrReceiverAccountNumber(accountNumber, accountNumber);
         return transactions.stream().map(transaction -> {
             TransactionDTO dto = new TransactionDTO();
             dto.setId(transaction.getId());
